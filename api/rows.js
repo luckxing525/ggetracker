@@ -16,23 +16,46 @@
 
 import { Redis } from "@upstash/redis";
 
-// When you connect Upstash in Vercel, it adds the database address and key as
-// environment variables. Their exact names depend on the prefix you chose
-// (KV_REST_API_URL, UPSTASH_REDIS_REST_URL, STORAGE_KV_REST_API_URL, ...),
-// so we look for any of them instead of guessing one name.
-function findEnv(kind) {
+// When you connect Upstash in Vercel, it adds the database's address and key as
+// environment variables. Their names vary (KV_REST_API_URL, UPSTASH_REDIS_REST_URL,
+// STORAGE_KV_REST_API_URL, REDIS_URL, ...) depending on how it was connected, so
+// instead of trusting one name we look at all of them and use whatever works.
+function findDb() {
   const env = process.env;
-  const exact = kind === "url"
-    ? ["KV_REST_API_URL", "UPSTASH_REDIS_REST_URL"]
-    : ["KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_TOKEN"];
-  for (const k of exact) if (env[k]) return env[k];
-  const re = kind === "url" ? /(KV_REST_API_URL|REDIS_REST_URL)$/ : /(KV_REST_API_TOKEN|REDIS_REST_TOKEN)$/;
-  const key = Object.keys(env).find((k) => re.test(k) && !/READ_ONLY/.test(k) && env[k]);
-  return key ? env[key] : "";
+  const names = Object.keys(env);
+  const isRO = (k) => /READ_ONLY/i.test(k);
+
+  // 1) A REST address + token pair (the normal Upstash setup).
+  let url = env.KV_REST_API_URL || env.UPSTASH_REDIS_REST_URL || "";
+  let token = env.KV_REST_API_TOKEN || env.UPSTASH_REDIS_REST_TOKEN || "";
+  if (!url) {
+    const k = names.find((n) => /(REST_API_URL|REDIS_REST_URL)$/i.test(n) && /^https?:\/\//i.test(env[n] || ""))
+      || names.find((n) => !isRO(n) && /^https:\/\/.+upstash\.io/i.test(env[n] || ""));
+    if (k) url = env[k];
+  }
+  if (!token) {
+    const k = names.find((n) => !isRO(n) && /(REST_API_TOKEN|REDIS_REST_TOKEN|KV_TOKEN|_TOKEN)$/i.test(n) && /upstash|kv|redis|storage/i.test(n) && env[n]);
+    if (k) token = env[k];
+  }
+  if (url && token) return { url, token };
+
+  // 2) Only a connection string like rediss://default:PASSWORD@host.upstash.io:6379
+  //    (Vercel sometimes adds just REDIS_URL / KV_URL / STORAGE_URL). Upstash lets us
+  //    turn that into the REST address (https://host) and token (the password).
+  for (const n of names) {
+    const v = env[n] || "";
+    const m = v.match(/^rediss?:\/\/[^:]*:([^@]+)@([^:/]+\.upstash\.io)/i);
+    if (m) return { url: "https://" + m[2], token: decodeURIComponent(m[1]) };
+  }
+  return null;
 }
-const DB_URL = findEnv("url");
-const DB_TOKEN = findEnv("token");
-const redis = DB_URL && DB_TOKEN ? new Redis({ url: DB_URL, token: DB_TOKEN }) : null;
+const DB = findDb();
+const redis = DB ? new Redis({ url: DB.url, token: DB.token }) : null;
+
+// For the error message only: which setting NAMES look database-related (never values).
+function dbLikeNames() {
+  return Object.keys(process.env).filter((n) => /redis|upstash|kv_|storage/i.test(n)).sort();
+}
 
 const KEY = "gge:rows";
 const MAX_ROW_BYTES = 20000; // a tracker row is tiny; this stops junk uploads
@@ -80,8 +103,11 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: "Wrong password" });
   }
   if (!redis) {
+    const seen = dbLikeNames();
     return res.status(500).json({
-      error: "The database isn't connected. In Vercel: Storage → connect Upstash Redis to this project, then Redeploy.",
+      error: seen.length
+        ? "Found database settings (" + seen.join(", ") + ") but none of them is an Upstash Redis address. Make sure the database you connected is Upstash Redis, then Redeploy."
+        : "This deployment has no database settings yet. In Vercel: Storage → your Upstash database → Connect Project (tick Production, Preview and Development), then Deployments → Redeploy.",
     });
   }
 
