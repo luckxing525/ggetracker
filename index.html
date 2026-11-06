@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GGE Outreach Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: the printed toolkit, made clickable. Pick a situation -> a guide page (band, step number, WHEN/WHO, to-dos, templates). Tracker is one tab. Single light theme, matching the PDFs. */
+:root{
+  --plum:#6B1A45; --ink:#2A2230; --muted:#6E6573; --line:#E6DDE2; --paper:#FFFFFF; --bg:#FAF7F8;
+  --teal:#2A9D8F; --teal-soft:#BEE1DD; --coral:#E9806E; --pink-soft:#F7D3CA; --yellow:#F4C542; --yellow-soft:#FFF1BC; --lilac-soft:#EAD0E8; --mauve-soft:#E2D3DC;
+  --hl:#FAD9CF;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif; --body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--body)}
+h1,h2,h3{font-family:var(--display);color:var(--plum);text-transform:uppercase;margin:0;line-height:1.02;text-wrap:balance;letter-spacing:.01em}
+h1{font-size:46px;font-weight:800}
+h2{font-size:26px;font-weight:800}
+h3{font-size:19px;font-weight:700}
+button,input,select,textarea{font:inherit;color:inherit}
+input,select,textarea{background:#fff;color:var(--ink);color-scheme:light}
+input::placeholder,textarea::placeholder{color:#9A929E}
+:focus-visible{outline:2px solid var(--plum);outline-offset:2px}
+a{color:var(--plum)}
+.top{display:flex;align-items:center;gap:16px;padding:14px 24px;background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;flex-wrap:wrap}
+.stripe{height:6px;background:linear-gradient(90deg,var(--teal) 0 25%,var(--yellow) 25% 50%,var(--coral) 50% 75%,#B784B2 75%)}
+.logo{font-family:var(--display);font-weight:800;color:var(--plum);font-size:20px;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.logo span{width:4px;height:22px;background:var(--teal);border-radius:2px}
+.tabs{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.tabs a{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:16px;letter-spacing:.03em;text-decoration:none;color:var(--muted);padding:6px 14px;border-radius:20px}
+.tabs a.on{background:var(--plum);color:#fff}
+.tabs a:hover:not(.on){color:var(--plum);background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 24px 80px;display:flex;flex-direction:column;gap:26px}
+.band{border-radius:18px;padding:28px 32px;position:relative;overflow:hidden}
+.band .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--plum);margin-bottom:6px}
+.band .lead{max-width:60ch;margin-top:10px;font-size:17px}
+.band .big{position:absolute;right:26px;top:6px;font-family:var(--display);font-weight:800;font-size:150px;line-height:1;opacity:.35;color:#fff;pointer-events:none}
+.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.pill{background:#fff;border-radius:20px;padding:4px 12px;font-size:14px;font-weight:600;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.pill b{font-size:11px;letter-spacing:.12em;color:var(--muted);margin-right:6px}
+.c-teal{background:var(--teal-soft)} .c-pink{background:var(--pink-soft)} .c-yellow{background:var(--yellow-soft)} .c-lilac{background:var(--lilac-soft)} .c-mauve{background:var(--mauve-soft)}
+.grouphead{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+.grouphead .n{font-family:var(--display);font-weight:800;color:var(--plum);font-size:15px;border:2px solid var(--plum);border-radius:50%;width:30px;height:30px;display:grid;place-items:center;flex:none}
+.sits{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.sit{text-align:left;border:none;border-radius:14px;padding:16px 18px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-height:104px;transition:transform .12s, box-shadow .12s}
+.sit:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(107,26,69,.12)}
+.sit .t{font-family:var(--display);font-weight:700;font-size:22px;color:var(--plum);text-transform:uppercase;line-height:1.05}
+.sit .d{font-size:14px;color:var(--ink);opacity:.8}
+.sit .tag{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--plum);opacity:.7}
+.back{align-self:flex-start;background:none;border:none;color:var(--plum);font-weight:600;cursor:pointer;padding:0;font-size:15px}
+.choices{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.choices .q{font-weight:700;margin-right:6px}
+.chip{border:2px solid var(--plum);background:#fff;color:var(--plum);border-radius:22px;padding:5px 14px;font-weight:600;cursor:pointer;font-size:15px}
+.chip.on{background:var(--plum);color:#fff}
+.toggle{display:inline-flex;gap:8px;align-items:center;font-weight:600;cursor:pointer;font-size:15px}
+.toggle input{width:18px;height:18px;accent-color:var(--plum)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:22px;align-items:start}
+.panel{background:var(--paper);border-radius:14px;padding:20px;border:1px solid var(--line)}
+.panel h3{margin-bottom:12px}
+.todo label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.todo label:last-child{border-bottom:none}
+.todo input{width:18px;height:18px;margin-top:2px;accent-color:var(--teal);flex:none}
+.todo .when{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.todo input:checked + span{opacity:.5;text-decoration:line-through}
+.writing{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+.writing b{font-family:var(--display);text-transform:uppercase;color:var(--plum);font-size:17px;margin-right:4px}
+.writing input{border:1px solid var(--line);border-radius:8px;padding:6px 10px;min-width:180px;flex:1}
+.writing .hint{font-size:13px;color:var(--muted);flex-basis:100%}
+.tpls{display:flex;flex-direction:column;gap:14px}
+.tpl{background:var(--paper);border:2px dashed #D9C7D1;border-radius:14px;padding:16px 18px}
+.tpl .h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.code{font-family:var(--display);font-weight:700;font-size:14px;color:#fff;background:var(--teal);border-radius:6px;padding:1px 8px;letter-spacing:.04em}
+.code.c2{background:var(--coral)} .code.c3{background:var(--plum)}
+.tpl .h h3{font-size:18px;margin-right:auto}
+.copy{background:var(--yellow);border:none;border-radius:16px;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.08em;padding:3px 12px;cursor:pointer;color:var(--ink)}
+.copy:hover{filter:brightness(.95)}
+.copy.ghost{background:var(--yellow-soft)}
+.tpl .body{white-space:pre-wrap;font-size:15.5px;line-height:1.65}
+.tpl .subj{display:block;font-weight:700;margin-bottom:8px}
+.hl{background:var(--hl);border-radius:3px;padding:1px 3px;outline:none;border-bottom:2px solid transparent;cursor:text;min-width:2ch;display:inline}
+.hl:empty::before{content:attr(data-f);color:#9B5B66;font-style:italic}
+.hl.opt:empty{background:transparent;border:1px dashed #D9C7D1}
+.hl:focus{border-bottom-color:var(--plum);background:#FCE7E0}
+.hl.filled{background:#E6F2EF;color:var(--ink)}
+.tpl .note{font-size:13.5px;color:var(--muted);margin-top:10px}
+.tip{font-size:13px;color:var(--muted)}
+.sec{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sec .num{width:28px;height:28px;border-radius:50%;background:var(--plum);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:16px;flex:none}
+.sec h2{font-size:22px}
+.ttabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.ttab{border:2px solid var(--line);background:#fff;border-radius:12px;padding:6px 12px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:1px}
+.ttab b{font-family:var(--display);text-transform:uppercase;color:var(--plum);font-size:16px;font-weight:700}
+.ttab span{font-size:12px;color:var(--muted);font-weight:600}
+.ttab.on{border-color:var(--plum);background:var(--pink-soft)}
+.left{font-size:13px;font-weight:700;color:#9A2F21;margin:-4px 0 8px}
+.left.ok{color:#1F6E59}
+.hl.flash{animation:flash .9s ease 2}
+@keyframes flash{50%{background:#F4B8A8}}
+.link{font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.link.on{color:#1F6E59}
+.link.off{color:var(--muted)}
+.addtr{background:var(--teal);color:#fff;border:none;border-radius:20px;padding:5px 12px;font-weight:600;cursor:pointer}
+.notes{list-style:none;margin:0;padding:0}
+.notes li{padding:8px 0;border-bottom:1px solid var(--line)}
+.notes li:last-child{border-bottom:none}
+.notes .when{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.donebar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:var(--paper);border:2px solid var(--plum);border-radius:16px;padding:16px 20px}
+.donebar.is{border-color:#1F6E59;background:#EAF5F1}
+.bigcheck{display:inline-flex;align-items:center;gap:12px;background:var(--plum);color:#fff;border:none;border-radius:14px;padding:12px 20px;font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em;cursor:pointer}
+.bigcheck .box{width:26px;height:26px;border-radius:7px;border:3px solid #fff;display:grid;place-items:center;font-size:18px;line-height:1}
+.donebar.is .bigcheck{background:#1F6E59}
+.donebar .msg{font-size:15px;flex:1;min-width:220px}
+.kpis{display:flex;flex-direction:column;gap:14px}
+.funnel{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.fstep{position:relative;padding:16px 26px 16px 22px;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 50%,calc(100% - 16px) 100%,0 100%,16px 50%);background:var(--mauve-soft)}
+.fstep:first-child{clip-path:polygon(0 0,calc(100% - 16px) 0,100% 50%,calc(100% - 16px) 100%,0 100%);padding-left:18px}
+.fstep.goal{background:var(--teal-soft)}
+.fstep .v{font-family:var(--display);font-weight:800;font-size:34px;color:var(--plum);line-height:1}
+.fstep .v small{font-size:17px;font-weight:700;margin-left:4px}
+.fstep .k{font-size:13px;margin-top:4px}
+.fstep .tgt{font-size:12px;font-weight:700;color:var(--muted);margin-top:6px;letter-spacing:.02em}
+.chans{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.chan{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--plum);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.chan h3{font-size:19px;margin:0}
+.chan .ex{font-size:13px;color:var(--muted);margin-top:-4px}
+.chan .row2{display:flex;justify-content:space-between;align-items:baseline;font-size:14px}
+.chan .row2 b{font-family:var(--display);font-size:26px;color:var(--plum)}
+.bar{height:10px;background:#EEE6EA;border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal);border-radius:6px}
+.bar.s i{background:var(--coral)}
+.chan .via{font-size:13px;border-top:1px dashed var(--line);padding-top:6px}
+.pace{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:14px}
+.pace b{font-family:var(--display);font-size:20px;color:var(--plum)}
+.chsel{border:1px solid var(--line);border-radius:8px;padding:6px 10px;min-width:180px}
+@media (max-width:820px){.funnel,.chans{grid-template-columns:1fr 1fr}}
+.prog{font-size:12px;color:var(--muted);margin-top:3px;padding-left:7px}
+.resetall{background:none;border:1px solid var(--line);border-radius:20px;padding:5px 12px;cursor:pointer;color:var(--muted);font-weight:600;font-size:14px}
+.resetall:hover{color:var(--plum);border-color:var(--plum)}
+.next{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.next .lbl{font-family:var(--display);text-transform:uppercase;font-weight:700;color:var(--plum);font-size:17px}
+.nextbtn{border:none;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:600}
+.callout{background:var(--teal-soft);border-radius:12px;padding:14px 18px;display:flex;gap:12px;align-items:flex-start}
+.callout b{font-family:var(--display);text-transform:uppercase;color:var(--plum);font-size:17px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);text-align:left;padding:10px 14px;border-bottom:2px solid var(--line);font-weight:700}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr.go{cursor:pointer} tr.go:hover td{background:var(--bg)}
+.tablewrap{overflow-x:auto;background:var(--paper);border-radius:14px;border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat .v{font-family:var(--display);font-weight:800;font-size:30px;text-transform:uppercase}
+.stat .k{font-size:14px;color:var(--muted)}
+.recap input{width:100%;border:1px solid var(--line);border-radius:6px;padding:5px 8px;font-size:14px}
+.recap td{padding:6px 8px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.metrics label{font-size:12px;font-weight:600;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+.tr input,.tr select{width:100%;border:1px solid transparent;background:#fff;border-radius:6px;padding:5px 7px;font-size:15px;min-width:110px}
+.tr input:hover,.tr select:hover{border-color:var(--line)}
+.tr input:focus,.tr select:focus{border-color:var(--plum);background:#fff;outline:none}
+.warm{font-size:12px;font-weight:700;border-radius:12px;padding:2px 9px;white-space:nowrap}
+.warm.ok{background:#E2F2EC;color:#1F6E59} .warm.mid{background:var(--yellow-soft);color:#7A5A00} .warm.cold{background:var(--pink-soft);color:#9A2F21}
+.btn{background:var(--plum);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-weight:600;cursor:pointer}
+.btn.light{background:#fff;color:var(--plum);border:2px solid var(--plum)}
+.x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:4px 8px}
+.x:hover{color:#9A2F21}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--plum);color:#fff;padding:9px 18px;border-radius:20px;font-weight:600;z-index:50}
+.foot{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+@media (max-width:820px){
+  .cols{grid-template-columns:1fr}
+  h1{font-size:36px}
+  .band{padding:22px 20px}
+  .band .big{font-size:96px}
+  .stats,.metrics{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){.sit{transition:none}}
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+<header class="top"><div class="logo"><span></span>GGE Outreach Guide</div><nav class="tabs" id="tabs"></nav><button class="resetall" data-reset title="Clear the company, names and every blank you typed">↺ Reset</button><button class="resetall" data-signout title="Sign out on this device">Sign out</button></header>
+<main class="wrap" id="main"></main>
+<div class="toast" id="toast" hidden></div>
+<textarea id="clip" aria-hidden="true" tabindex="-1" style="position:fixed;left:-9999px;opacity:0"></textarea>
+<script>
+"use strict";
+/* ---------- Templates (from the toolkit PDFs) ---------- */
+const TPL={
+ T1:{t:"After a gift",s:"Thank you, [Name]!",b:"Hi [Name],\n\nThank you so much for [Company]’s [gift]! It’s going straight to [use], and our young people are so excited.\n\nI’ll send you an update by [update date].\n\nThank you again, [Your name]"},
+ T2:{t:"After an event",s:"Thank you for joining us at [event]!",b:"Hi [Name],\n\nThank you to you and the [Company] team for coming to [event]! [One thing that happened]. I’ve attached a few photos.\n\nHope to see you at [next event]!\n\nBest, [Your name]"},
+ T3:{t:"After they donate items",s:"Your [items] made it to our youth!",b:"Hi [Name],\n\nYour [items] arrived, and they’re already with young people in [program]. Thank you so much for thinking of us!\n\nThanks again, [Your name]"},
+ T4:{t:"Handwritten card",c:3,b:"Dear [Name],\n\nThank you for being with us in our 25th year. Because of [Company], [result]. We’re so grateful.\n\nJoanne",n:"Joanne writes this by hand, along with her thank-you call."},
+ T5:{t:"Social post",b:"Thank you, [@Company], for [what they did]! Because of you, [result].",n:"*Attach images of in-kind donations, event snapshots, photos of impact."},
+ G1:{t:"Receipt for a cash gift",c:2,b:"Dear [Name],\n\nThank you for [Company]’s gift of $[amount] to Girls for Gender Equity on [gift date]. GGE is a 501(c)(3) nonprofit, EIN [EIN]. No goods or services were provided in exchange for this gift.\n\n[Joanne’s signature]",alt:1},
+ G2:{t:"Receipt for donated items",c:2,b:"Dear [Name],\n\nThank you for [Company]’s donation of [items] to Girls for Gender Equity on [gift date]. GGE is a 501(c)(3) nonprofit, EIN [EIN]. No goods or services were provided in exchange for this gift.\n\n[Joanne’s signature]",alt:1,n:"Describe the items only. No dollar value."},
+ U0:{t:"Ask staff for a story",b:"Hi [staff name]! I’m sending [Company] an update this week. Do you have a quick story or quote from [program] I could share (with the young person’s OK)? A photo would be great too. Thanks!",n:"Send this to program staff first, a few days before the update."},
+ U1:{t:"Update email",s:"An update from GGE",b:"Hi [Name],\n\nI wanted to share what [Company]’s support has done so far: [number].\n\n[story]. I’ve attached a photo from [event]. It has truly been unbelievably inspiring what you’ve empowered them to do.\n\nNext up is [next event, date]. We’d love to see you there!\n\nBest, [Your name]"},
+ U2:{t:"Short version",s:"Quick GGE update",b:"Hi [Name], quick update: thanks to [Company], [number]. Next up is [next event, date]. Thank you!\n\n[Your name]"},
+ E1:{t:"Ask for their logo",s:"Your logo for [event]",b:"Hi [Name],\n\nSo excited to have [Company] at [event] on [event date]! Could you send your logo (PNG or SVG) and how you’d like your name to appear? I’ll send our social post for your OK by [post OK date].\n\nThanks! [Your name]"},
+ E2:{t:"Say it on stage",c:3,b:"A big thank-you to [Company], who [what they did]. Because of them, [result]. Let’s give them a hand!",n:"Read this out loud on the day."},
+ E3:{t:"Social post",b:"Thank you, [@Company], for [what they did] at [event]!",n:"Attach a photo, and get their OK on the post first."},
+ ER1:{t:"Recap email",c:2,s:"Your recap from [event]",b:"Hi [Name],\n\nThank you again for being part of [event]! I’ve attached a one-page recap of everything [Company] was part of, with photos.\n\nA few highlights: [attendance], [one moment]. [If anything fell short: what happened and how we’ll make it right.]\n\nWe’re already planning [next event], and I’d love to talk about how [Company] could be part of it.\n\nBest, [Your name]"},
+ R0:{t:"Year-end report outline (for Google Docs)",c:3,b:"[Company] + Girls for Gender Equity: Our 25th Year\n\n1. One-line headline: [main result, with one number]\n2. A note from Joanne: [2–3 sentences]\n3. By the numbers: [$ given] · [youth reached] · [volunteer hours]\n4. Photos and one youth quote: [quote, with their OK]\n5. Next year: [1–2 plans for 2028] · Ways to stay involved: [option 1] · [option 2]",n:"Paste into a Google Doc, add photos, and attach it to R1."},
+ R1:{t:"Renewal email",s:"Thank you + 2028",b:"Hi [Name],\n\nThank you for such a great 25th year! I’ve attached a short report on what [Company] helped make happen, like [one highlight].\n\nWe’re starting to plan 2028 and would love to keep working together, maybe through [option 1] or [option 2]. Could we find 20 minutes in the next few weeks?\n\nBest, [Your name]"},
+ R2:{t:"On the call",c:3,b:"Start: “Thanks again for this year. What worked well for your team?”\n\nSuggest: “Here are two ways we could keep going: [option 1] or [option 2].”\n\nWrap up: “What sounds right for 2028? I’ll send it in writing by [date].”"},
+ R3:{t:"If they say no",c:2,s:"Thank you, [Name]",b:"Hi [Name],\n\nTotally understand, and thank you for everything this year. Would you be open to a quick 10-minute call so we can learn what would make GGE a better fit next time? We’d love to keep you on our updates list in the meantime.\n\nBest, [Your name]"},
+ A:{t:"Past supporter",s:"Thank you, and an idea for our 25th",b:"Hi [Name],\n\nWe’d like to thank [Company] for backing Girls for Gender Equity in [year]. We’re super proud to share that your gift helped us [result], and we look to continue building our strong partnership!\n\nWe turn 25 this year and are planning a few big moments, like our Pride float in June. I think [Company] could be a great fit for [specific ask].\n\nWould you be open to a short 15-minute call in the next couple of weeks? I’ve attached a short overview.\n\nThanks,\n[Your name]",n:"For: Bobbi Brown / Estée Lauder · Youth to the People / L’Oréal · P&G · Saks · Eileen Fisher · Aerie"},
+ B:{t:"New company: cold or referral",s:"Idea for [Company] + Girls for Gender Equity",b:"Hi [Name],\n\nI hope you’re doing well! My name is [Your name], and I’m the [title] at Girls for Gender Equity, a Brooklyn nonprofit where young people of color lead our work on gender and racial justice.\n\nI came across [something specific about Company] and thought it was a really natural fit with what we do. We turn 25 this year, and we’d love for [Company] to be part of it, for example by [specific ask] at [event] on [event date].\n\nWould you be open to a quick 15-minute call? Happy to send over a one-pager first.\n\nBest, [Your name]",n:"Referral? Make the subject: “[Referrer] suggested I reach out”"},
+ C:{t:"Employee champion",s:"Quick question about [Company]’s gift matching",b:"Hi [Name],\n\nHope your week is going well! I noticed [Company] matches employee gifts up to [$ amount], and wanted to ask if your team might be up for a small giving drive or volunteer day for GGE’s 25th this [month].\n\nWe’d send over a ready-to-forward email and a one-page impact sheet, so it’s very little work for you.\n\nThanks so much, [Your name]",n:"Best for banks + large employers."},
+ D:{t:"Follow-up",c:2,s:"Re: [original subject]",b:"Hi [Name],\n\nJust wanted to bump this to the top of your inbox! Since my last note, [new detail, e.g., Denim Day is April 28].\n\nIf now isn’t the right time, totally understand. Is there someone else I should reach out to?\n\nThanks, [Your name]"},
+ E:{t:"Thank-you",s:"Thank you, [Name]!",b:"Hi [Name],\n\nThank you so much for [gift or meeting]! It truly means a lot to our young people.\n\nNext up: [next step]. I’ll send an update by [date], and we’d love to see you at [event].\n\nBest, [Your name]"}
+};
+const WHEN={T1:"Day 1–2",T4:"Day 1–2 · from Joanne",T5:"Optional",T3:"When items arrive",G1:"Within a week",G2:"Within a week",E1:"2–4 weeks before",E2:"On stage",T2:"2 days after",E3:"2 days after",ER1:"3 days after",U0:"First, to staff",U1:"Every 3 months",U2:"Or the short one",R0:"December 2027",R1:"With the report",R2:"On the call",R3:"Right away",A:"First email",B:"First email",C:"First email",D:"1 wk · 2 wks · 1 mo",E:"Within 48 hours"};
+const ALT_FROM="No goods or services were provided in exchange for this gift.", ALT_TO="In return, [Company] received [item], worth $[value].";
+
+/* ---------- Situations: "what's happening?" ---------- */
+const GROUPS=[
+ {n:"1",title:"Getting a yes",sub:"Before they’ve committed"},
+ {n:"2",title:"Right after the yes",sub:"The first week"},
+ {n:"3",title:"Around an event",sub:"Before, on the day, after"},
+ {n:"4",title:"Keeping them close",sub:"All year, and at renewal"}
+];
+const SIT={
+ first:{g:0,c:"c-mauve",label:"Reaching out for the first time",d:"Writing the first email to a company",num:"B05",eyebrow:"Outreach toolkit",title:"The first email",lead:"Under 100 words, one clear ask, and attach the Partner Guide PDF.",when:"~3 months before the event",who:"Outreach lead",
+   choose:{q:"Who are they?",opts:[["past","They’ve given before"],["new","New company"],["bank","Bank / big employer"]],def:"past",tpl:{past:["A"],new:["B"],bank:["C"]}},
+   todo:[["1 · Subject line","Match it to how you know them"],["2 · Why them","One line on why this company"],["3 · The 25th","One sentence: “This year, GGE turns 25.”"],["4 · A specific ask","Event + date + how to help"],["5 · One next step","A 15-minute call"],["Before sending","Attach the Partner Guide PDF"]],
+   next:["noreply","meeting"]},
+ noreply:{g:0,c:"c-mauve",label:"They haven’t replied",d:"Time to follow up",num:"B07",eyebrow:"Follow-through",title:"Follow up",lead:"Bump it with one new detail, and ask if someone else is better to talk to.",when:"1 week · 2 weeks · 1 month",who:"Outreach lead",tpl:["D"],
+   todo:[["Follow-up 1","1 week after the first email"],["Follow-up 2","2 weeks later"],["Follow-up 3","1 month later. That’s the last one (3 max)"]],next:["meeting"]},
+ meeting:{g:0,c:"c-mauve",label:"We just had a call or meeting",d:"Say thanks and confirm",num:"B09",eyebrow:"The partner loop",title:"Confirm + thank",lead:"Thank them within 48 hours and send a recap of the meeting.",when:"Within 48 hours",who:"Staff",tpl:["E"],
+   todo:[["Within 48 hours","Send the thank-you + meeting recap"],["On the call","Propose a level: Advocate, Event supporter, Campaign partner or Anchor"]],next:["yes"]},
+ yes:{g:1,c:"c-pink",label:"They said yes!",d:"Thank them in the first 2 days",num:"02",eyebrow:"After forming a partnership",title:"Thank-you notes",lead:"Fill in the highlighted parts with real details and be sure to send within two days.",when:"Within 2 days",who:"Outreach lead + Joanne",
+   choose:{q:"What are they giving?",opts:[["cash","Money"],["items","Donated items"],["event","Sponsoring an event"]],def:"cash",tpl:{cash:["T1","T5"],items:["T1","T5"],event:["T1","T5"]}},
+   big:true,
+   todo:[["Day 1–2","Send a thank-you email (T1)"],["Day 1–2","Joanne calls bigger partners to say thanks (T4)"],["Within a week","Send a gift receipt if it’s $250+ or items (G1 · G2)"],["First call","Ask when their team sets next year’s giving budget"]],
+   next:["gift","eventsoon","quarter"]},
+ gift:{g:1,c:"c-yellow",label:"A gift or donation came in",d:"Receipt it within a week",num:"03",eyebrow:"Following donations",title:"Receipts + recognition",lead:"Make the work easier for corporations’ finance and legal teams.",when:"Within a week of a gift",who:"Outreach lead + finance",
+   choose:{q:"What came in?",opts:[["cash","Money"],["items","Donated items"]],def:"cash",tpl:{cash:["G1"],items:["T3","G2"]}},alt:true,
+   todo:[["Needs","GGE’s name and EIN"],["Needs","The date of the gift"],["Needs","The cash amount, or a description of the items (no dollar value)"],["Needs","A line saying whether they got anything back, and what it was worth"],["By Jan 31","One yearly receipt if they gave more than once"]],
+   next:["eventsoon","quarter"]},
+ eventsoon:{g:2,c:"c-yellow",label:"Their event is 2–4 weeks away",d:"Logo, signs, spots and photo OKs",num:"05",eyebrow:"Event checklist",title:"Before the event",lead:"Use this list to streamline partner engagements at events.",when:"2–4 weeks before each event",who:"Outreach lead + event lead",tpl:["E1"],
+   todo:[["Before","Get their logo and name (E1)"],["Before","Agree on how we’ll thank them"],["Before","Get their OK on signs and posts"],["Before","Save their table or speaking spot"],["Before","Check photo OKs for youth"]],next:["eventday"]},
+ eventday:{g:2,c:"c-yellow",label:"It’s event day",d:"Logo up, thank them out loud",num:"05",eyebrow:"Event checklist",title:"On the day",lead:"Make the partner feel seen while they’re in the room.",when:"Day of",who:"Outreach lead + event lead",tpl:["E2"],
+   todo:[["Day of","Put their logo up"],["Day of","Thank them out loud (E2)"],["Day of","Take photos of their team"],["Day of","Have someone greet them"],["Day of","Grab one quote for the report"]],next:["eventafter"]},
+ eventafter:{g:2,c:"c-teal",label:"The event just happened",d:"Thanks in 2 days, recap in 3",num:"06",eyebrow:"Post event",title:"After the event",lead:"Within 72 hours, send sponsors a one-pager on what we promised, what we delivered, and the impact they had.",when:"Thanks: 2 days after · Recap: 3 days after",who:"Outreach lead + event lead",tpl:["T2","E3","ER1"],recap:true,
+   todo:[["2 days after","Send thanks + photos (T2)"],["2 days after","Post and tag them (E3)"],["3 days after","Send the one-page recap (ER1)"],["After","Save highlights for the year-end report"]],next:["quarter"]},
+ quarter:{g:3,c:"c-lilac",label:"It’s been about 3 months",d:"Send a quick impact update",num:"04",eyebrow:"Post giving",title:"Quick updates",lead:"Every 3 months, update sponsors on the impact they helped drive at GGE, with real-life stories.",when:"Every 3 months",who:"Outreach lead + program staff",tpl:["U0","U1","U2"],
+   todo:[["Number","e.g., 120 young people joined Denim Day events"],["Story","1–2 sentences. First name only, with their OK"],["Photo","Make sure it’s OK to share"],["Next","Next event + a date they can join"]],next:["yearend"]},
+ cold:{g:3,c:"c-teal",label:"We haven’t talked in a while",d:"The 90-day warmness policy",num:"B09",eyebrow:"Continuing the partnership",title:"Keep them warm",lead:"Make an effort to reach out to every one of our partners at least once every 90 days.",when:"At least every 90 days",who:"Staff",tpl:["U2"],
+   todo:[["Level 1 · Advocate","Newsletter and event invites, every moment"],["Level 2 · Event supporter","Thank-you and photos after their event"],["Level 3 · Campaign partner","Mid-year update, twice a year"],["Level 4 · Anchor partner","Check-ins with Joanne, every quarter"]],next:["quarter"]},
+ yearend:{g:3,c:"c-mauve",label:"It’s renewal time",d:"Year-end report + the ask",num:"07",eyebrow:"Continuing the relationship",title:"Year-end report + renewal",lead:"A successful renewal should begin as soon as the event ends, not at the beginning of the next event.",when:"December 2027 · a quarter before their budget is set",who:"Outreach lead + Joanne",tpl:["R0","R1","R2"],
+   todo:[["December 2027","Write the year-end report (R0)"],["Same day","Send it with the renewal email (R1)"],["On the call","Start, suggest two options, wrap up (R2)"],["After the call","Send the plan in writing by the date you gave"]],next:["no"]},
+ no:{g:3,c:"c-pink",label:"They said no",d:"Thank them and keep the door open",num:"07",eyebrow:"Continuing the relationship",title:"If they say no",lead:"Thank them, learn what would make GGE a better fit, and keep them on the updates list.",when:"Right away",who:"Outreach lead",tpl:["R3"],
+   todo:[["Right away","Send the thank-you (R3)"],["If they agree","Have a 10-minute call to learn what would fit better"],["After","Keep them on the updates list"]],next:["first"]}
+};
+const C01=[["Day 1–2","Send a thank-you email","T1","yes"],["Day 1–2","Joanne calls bigger partners to say thanks","T4","yes"],["Within a week","Send a gift receipt (gifts of $250+ or donated items)","G1 · G2","gift"],["First call","Ask when their team sets next year’s giving budget","TRK","yes"],["2–4 weeks before each event","Ask for their logo and go through the event checklist","E1","eventsoon"],["2 days after each event","Send a thank-you with photos, potential post on social","T2 · E3","eventafter"],["3 days after each event","Send the one-page event recap","ER1","eventafter"],["Every 3 months","Send a short update on where GGE is now","U1","quarter"],["December 2027","Send the year-end report","R0","yearend"],["A quarter before their budget is set","Reach out about continuing the partnership","R1 · R2","yearend"],["By January 31","Send one yearly receipt if they gave more than once","G1","gift"]];
+const STAGES=[["first","First email sent"],["noreply","Waiting on a reply"],["meeting","Had a meeting"],["yes","Said yes"],["gift","Gift came in"],["eventsoon","Event coming up"],["eventday","Event day"],["eventafter","Event just happened"],["quarter","Partner, keeping in touch"],["yearend","Renewal time"],["no","Said no"]];
+const CHANNELS=[["alumnae","GGE alumnae","Former GGE youth leaders",15,[1,1],"host","GGE leadership note"],["values","Values-led allies","Eileen Fisher and Saks",25,[2,3],"sponsors","Partnership form"],["brooklyn","Brooklyn brands","Carol’s Daughter and Golde",50,[4,6],"sponsors","In-person visit"],["corp","Corporations","JPMorgan Chase and Unilever",25,[2,3],"sponsors","Warm introduction"]];
+const REPLIED=["meeting","yes","gift","eventsoon","eventday","eventafter","quarter","yearend","no"], SIGNED=["yes","gift","eventsoon","eventday","eventafter","quarter","yearend"];
+const STAGE_OF={first:"first",noreply:"noreply",meeting:"meeting",yes:"yes",gift:"gift",eventsoon:"eventsoon",eventday:"eventday",eventafter:"eventafter",quarter:"quarter",cold:"quarter",yearend:"yearend",no:"no"};
+const NEXT_FOR={eventday:"eventafter",first:"noreply",noreply:"noreply",meeting:"yes",yes:"gift",gift:"quarter",eventsoon:"eventday",eventafter:"eventafter",quarter:"quarter",yearend:"yearend",no:"no"};
+
+/* ---------- State ---------- */
+const ls={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const S={tab:{},vals:ls.get("gge.vals",{}),pick:{},big:false,alt:false,rows:{},mode:"loading",recap:ls.get("gge.recap",null)};
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const daysSince=s=>{if(!/^\d{4}-\d\d-\d\d$/.test(s||""))return null;const[y,m,d]=s.split("-").map(Number);const n=new Date();return Math.round((new Date(n.getFullYear(),n.getMonth(),n.getDate())-new Date(y,m-1,d))/864e5)};
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>t.hidden=true,2200)}
+function saveVals(){clearTimeout(saveVals.t);saveVals.t=setTimeout(()=>ls.set("gge.vals",S.vals),300)}
+
+/* ---------- Template rendering with editable highlights ---------- */
+function text(code){let b=TPL[code].b;if(TPL[code].alt&&S.alt)b=b.replace(ALT_FROM,ALT_TO);return {s:TPL[code].s||"",b}}
+function hlHTML(str){return esc(str).replace(/\[([^\]]+)\]/g,(m,f0)=>{const f=f0.replace(/&amp;/g,"&").replace(/&#39;/g,"'").replace(/&quot;/g,'"');const v=S.vals[f]||"";return '<span class="hl'+(v?" filled":"")+(/^if /i.test(f)?" opt":"")+'" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-label="'+esc(f)+'" data-f="'+esc(f)+'">'+esc(v)+'</span>'})}
+function plain(str){return str.replace(/\[([^\]]+)\]/g,(m,f)=>{const v=S.vals[f];if(v)return v;return /^if /i.test(f)?"":m}).replace(/ +\n/g,"\n").replace(/\n{3,}/g,"\n\n")}
+function tplCard(code,hidden){const t=TPL[code];const {s,b}=text(code);
+ return '<article class="tpl" data-tpl="'+code+'"'+(hidden?' hidden':'')+'><div class="h"><span class="code'+(t.c?" c"+t.c:"")+'">'+code+'</span><h3>'+esc(t.t)+'</h3>'+(s?'<button class="copy ghost" data-copy="'+code+'" data-part="s">COPY SUBJECT</button>':'')+'<button class="copy" data-copy="'+code+'" data-part="b">COPY</button></div><div class="left" data-left="'+code+'"></div>'+
+ '<div class="body">'+(s?'<span class="subj">Subject: '+hlHTML(s)+'</span>':'')+hlHTML(b)+'</div>'+(t.n?'<div class="note">'+esc(t.n)+'</div>':'')+'</article>'}
+
+/* ---------- Views ---------- */
+function tabs(r){const a=(h,l,on)=>'<a href="#'+h+'" class="'+(on?"on":"")+'">'+l+'</a>';
+ document.getElementById("tabs").innerHTML=a("home","What do I send?",r==="home"||r.startsWith("s-"))+a("timeline","Timeline",r==="timeline")+a("tracker","Tracker",r==="tracker")}
+function viewHome(){
+ return '<section class="band c-teal"><div class="eyebrow">Girls for Gender Equity · keeping partners</div><h1>What’s happening<br>with your partner?</h1><div class="lead">Pick the moment you’re in. You’ll get the step from the guide, what to do, and the email to send, with the blanks ready to fill in.</div><div class="big" aria-hidden="true">?</div></section>'+
+ GROUPS.map((g,i)=>'<section><div class="grouphead"><span class="n">'+g.n+'</span><h2>'+esc(g.title)+'</h2><span class="tip">'+esc(g.sub)+'</span></div><div class="sits">'+Object.entries(SIT).filter(([k,s])=>s.g===i).map(([k,s])=>'<button class="sit '+s.c+'" data-go="s-'+k+'"><span class="tag">'+esc(s.num.length<3?"STEP "+s.num:s.num)+'</span><span class="t">'+esc(s.label)+'</span><span class="d">'+esc(s.d)+'</span></button>').join("")+'</div></section>').join("")+
+ '<div class="callout"><div><b>The 90-day warmness policy</b><div>Make an effort to reach out to every one of our partners at least once every 90 days.</div></div></div>'+
+ '<div class="foot">GGE · Keeping partners · Internal</div>';
+}
+function codesFor(k){const s=SIT[k];let c=s.choose?s.choose.tpl[S.pick[k]||s.choose.def]:s.tpl;c=c.slice();if(s.big&&S.big)c.splice(1,0,"T4");return c}
+function viewSit(k){
+ const s=SIT[k];if(!s)return viewHome();
+ const pick=S.pick[k]||(s.choose&&s.choose.def);
+ const ctrl=(s.choose?'<div class="choices"><span class="q">'+esc(s.choose.q)+'</span>'+s.choose.opts.map(o=>'<button class="chip'+(pick===o[0]?" on":"")+'" data-pick="'+o[0]+'">'+esc(o[1])+'</button>').join("")+'</div>':'')+
+  (s.big?'<label class="toggle"><input type="checkbox" data-big'+(S.big?" checked":"")+'> Bigger partner (Joanne also calls and sends a card)</label>':'')+
+  (s.alt?'<label class="toggle"><input type="checkbox" data-alt'+(S.alt?" checked":"")+'> They got something back (like event tickets)</label>':'');
+ const done=doneFor(k);
+ return '<button class="back" data-go="home">← All situations</button>'+
+ '<section class="band '+s.c+'"><div class="eyebrow">'+esc(s.eyebrow)+'</div><h1>'+esc(s.title)+'</h1><div class="lead">'+esc(s.lead)+'</div><div class="pills"><span class="pill"><b>WHEN</b>'+esc(s.when)+'</span><span class="pill"><b>WHO</b>'+esc(s.who)+'</span></div><div class="big" aria-hidden="true">'+esc(s.num)+'</div></section>'+
+ (ctrl?'<div style="display:flex;flex-direction:column;gap:12px">'+ctrl+'</div>':'')+
+ '<section><div class="sec"><span class="num">1</span><h2>Who’s it for?</h2></div><div class="writing"><input type="text" data-v="Company" list="trco" placeholder="Company" value="'+esc(S.vals.Company||"")+'" aria-label="Company"><datalist id="trco">'+Object.values(S.rows).filter(r=>r.company).map(r=>'<option value="'+esc(r.company)+'">').join("")+'</datalist><input type="text" data-v="Name" placeholder="Contact’s first name" value="'+esc(S.vals.Name||"")+'" aria-label="Contact’s name"><input type="text" data-v="Your name" placeholder="Your name" value="'+esc(S.vals["Your name"]||"")+'" aria-label="Your name"><select class="chsel" data-ch aria-label="Channel">'+chOpts((linkedRow()||{}).channel||S.vals._ch||"")+'</select><button class="btn light" data-reset title="Clear the company, names and every blank you typed">↺ Reset</button><div id="linkline" style="flex-basis:100%;display:flex;gap:10px;align-items:center;flex-wrap:wrap">'+linkHTML()+'</div></div></section>'+
+ '<div class="cols"><section><div class="sec"><span class="num">2</span><h2>Remember</h2></div><div class="panel" id="todopanel">'+todoInner(k)+'</div></section>'+
+ '<section><div class="sec"><span class="num">3</span><h2>Send this</h2></div>'+tplTabs(k)+'<div class="tpls">'+codesFor(k).map((c,i)=>tplCard(c,i!==tabIdx(k))).join("")+'</div><p class="tip" style="margin-top:8px">Click a highlighted blank to type in it. The same blank fills everywhere.</p></section></div>'+
+ (s.recap?recapHTML():'')+
+ '<section><div class="sec"><span class="num">4</span><h2>Done with this step?</h2></div><div class="donebar'+(stepDone(k)?" is":"")+'" id="donebar">'+doneBarHTML(k)+'</div></section>'+
+ '<div class="next"><span class="lbl">What usually comes next</span>'+s.next.map(n=>'<button class="nextbtn '+SIT[n].c+'" data-go="s-'+n+'">'+esc(SIT[n].label)+' →</button>').join("")+'</div>'+
+ '<div class="foot">GGE · Keeping partners · Internal</div>';
+}
+const norm=x=>String(x||"").trim().toLowerCase();
+function linkedRow(){const c=norm(S.vals.Company);if(!c)return null;return Object.values(S.rows).find(r=>norm(r.company)===c)||null}
+function doneFor(k){const r=linkedRow();if(r)return (r.done&&r.done[k])||{};return ls.get("gge.todo."+k,{})}
+function linkHTML(){const r=linkedRow();const c=(S.vals.Company||"").trim();
+ if(r)return '<span class="link on">✓ In the tracker</span>';
+ if(c)return '<span class="link off">New company. Pick its channel; it’s added to the tracker when you mark the step done.</span>';
+ return '<span class="link off">Pick a company from the tracker, or type a new one</span>'}
+function todoInner(k){return '<ul class="notes">'+SIT[k].todo.map(t=>'<li><span class="when">'+esc(t[0])+'</span>'+esc(t[1])+'</li>').join("")+'</ul>'}
+function stepDone(k){const r=linkedRow();return r&&r.steps&&r.steps[k]?r.steps[k]:null}
+function doneBarHTML(k){const r=linkedRow();const d=stepDone(k);const co=(S.vals.Company||"").trim();
+ const msg=d?'<b>Done on '+esc(fmtD(d))+'.</b> '+esc(r.company)+' is marked “'+esc(STAGES.find(x=>x[0]===STAGE_OF[k])[1])+'” in the tracker. Next up: <a href="#s-'+NEXT_FOR[STAGE_OF[k]]+'">'+esc(SIT[NEXT_FOR[STAGE_OF[k]]].label)+'</a>':
+  r?'Sent everything? Tick this and '+esc(r.company)+'’s row in the tracker moves to this step.':
+  co?'Tick this to add '+esc(co)+' to the tracker with this step done.':'Type the company in step 1 first, then tick this to log it in the tracker.';
+ return '<button class="bigcheck" data-markdone aria-pressed="'+(!!d)+'"><span class="box">'+(d?'✓':'')+'</span>'+(d?'Step done':'Mark step done')+'</button><span class="msg">'+msg+'</span>'}
+const fmtD=x=>{const[y,m,d]=String(x).split("-").map(Number);return ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][m-1]+" "+d};
+function refreshLink(){const k=route().slice(2);const r0=linkedRow();const cs=document.querySelector("[data-ch]");if(cs)cs.value=(r0&&r0.channel)||S.vals._ch||"";const ll=document.getElementById("linkline");if(ll)ll.innerHTML=linkHTML();const db_=document.getElementById("donebar");if(db_&&SIT[k]){db_.innerHTML=doneBarHTML(k);db_.classList.toggle("is",!!stepDone(k))}}
+function tabIdx(k){const n=codesFor(k).length;const i=S.tab[k]||0;return i<n?i:0}
+function tplTabs(k){const c=codesFor(k);if(c.length<2)return "";const on=tabIdx(k);return '<div class="ttabs" role="tablist">'+c.map((code,i)=>'<button class="ttab'+(i===on?" on":"")+'" role="tab" aria-selected="'+(i===on)+'" data-tab="'+i+'"><b>'+(i+1)+' · '+esc(TPL[code].t)+'</b><span>'+esc(WHEN[code]||"")+'</span></button>').join("")+'</div>'}
+function updateLeft(){document.querySelectorAll("[data-left]").forEach(el=>{const card=el.closest(".tpl");const seen=new Set();card.querySelectorAll(".hl:not(.opt)").forEach(h=>{if(!h.textContent.trim())seen.add(h.dataset.f)});const n=seen.size;el.className="left"+(n?"":" ok");el.textContent=n?n+" blank"+(n>1?"s":"")+" left to fill":"✓ Ready to send"})}
+function recapRows(){return S.recap||{rows:[["Logo on the float banner","Yes, on both sides",""],["Thank-you from the stage","",""],["Social post, tagged","",""],["Table at the event","",""],["",""," "]],m:{Attendance:"","Youth reached":"","Their team members who came":"","Social reach":""}}}
+function recapHTML(){const r=recapRows();
+ return '<section class="panel recap"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px"><h3 style="margin:0">The one-page recap</h3><button class="copy" data-copyrecap>COPY RECAP</button></div><p class="tip" style="margin:0 0 10px">What we promised, what we delivered, and the proof. Use the last row for anything that fell short, and how we’ll make it right.</p>'+
+ '<div class="tablewrap" style="border:none"><table><thead><tr><th>We promised</th><th>We delivered</th><th>Proof</th></tr></thead><tbody>'+r.rows.map((row,i)=>'<tr>'+row.map((c,j)=>'<td><input type="text" data-rc="'+i+'" data-j="'+j+'" value="'+esc(c.trim())+'" placeholder="'+(j===0?(i===r.rows.length-1?"Anything that fell short":"Promise"):j===1?"What happened":"photo / link")+'"></td>').join("")+'</tr>').join("")+'</tbody></table></div>'+
+ '<div class="metrics">'+Object.keys(r.m).map(k=>'<label>'+esc(k)+'<input type="text" data-rm="'+esc(k)+'" value="'+esc(r.m[k])+'"></label>').join("")+'</div></section>'}
+function viewTimeline(){
+ return '<section class="band c-teal"><div class="eyebrow">Sponsor engagement timeline</div><h1>When and what to send</h1><div class="lead">After securing a partnership, standardized steps should be taken to make the partner feel seen and foster a long-term relationship.</div><div class="pills"><span class="pill"><b>WHEN</b>The day they say yes</span><span class="pill"><b>WHO</b>Outreach lead</span></div><div class="big" aria-hidden="true">01</div></section>'+
+ '<div class="stats"><div class="stat"><div class="v" style="color:var(--teal)">19% vs 69%</div><div class="k">of first-time vs. repeat donors gave again in 2024</div></div><div class="stat"><div class="v" style="color:var(--coral)">39% more</div><div class="k">given next time by donors a leader thanked within 48 hours</div></div><div class="stat"><div class="v" style="color:#A0569A">72 hours</div><div class="k">the maximum turnaround time for an event recap</div></div></div>'+
+ '<div class="tablewrap"><table><thead><tr><th>When</th><th>Do this</th><th style="text-align:right">Template</th></tr></thead><tbody>'+C01.map(r=>'<tr class="go" data-go="s-'+r[3]+'"><td><b>'+esc(r[0])+'</b></td><td>'+esc(r[1])+'</td><td style="text-align:right"><span class="code c3">'+esc(r[2])+'</span></td></tr>').join("")+'</tbody></table></div><p class="tip">Click any row to open that step.</p>';
+}
+function progHTML(r){const st=r.steps||{};const ks=Object.keys(st).sort((x,y)=>st[x]<st[y]?-1:1);if(!ks.length)return "";const k=ks[ks.length-1];
+ return '<div class="prog">✓ '+esc(SIT[k]?SIT[k].title:k)+' · '+esc(fmtD(st[k]))+(ks.length>1?' · '+ks.length+' steps done':'')+'</div>'}
+function chOpts(v){return '<option value="">Pick channel…</option>'+CHANNELS.map(c=>'<option value="'+c[0]+'"'+(v===c[0]?" selected":"")+'>'+esc(c[1])+'</option>').join("")}
+function firstName(c){c=String(c||"").trim();if(!c)return "";let t=c.split(/[\s,<(\/]+/)[0];if(t.includes("@")){t=t.split("@")[0].split(/[._]/)[0];t=t.charAt(0).toUpperCase()+t.slice(1)}return t}
+function kpiHTML(){
+ const rows=Object.values(S.rows).filter(r=>(r.company||"").trim());const n=rows.length;
+ const rep=rows.filter(r=>REPLIED.includes(r.stage)).length, sig=rows.filter(r=>SIGNED.includes(r.stage)).length;
+ const pct=(a,b)=>b?Math.round(a/b*100):0;
+ const wk=rows.filter(r=>r.created&&Date.now()-r.created<7*864e5).length;
+ const noch=rows.filter(r=>!r.channel).length;
+ const f=(cls,v,unit,k,tgt)=>'<div class="fstep '+cls+'"><div class="v">'+v+'<small>'+unit+'</small></div><div class="k">'+k+'</div><div class="tgt">Goal: '+tgt+'</div></div>';
+ return '<section class="kpis" id="kpis"><div class="sec"><span class="num">★</span><h2>Live outreach KPIs</h2></div>'+
+ '<div class="funnel">'+f("",n,"contacts","in the tracker","115 (10 a week for 12 weeks)")+f("",pct(rep,n)+"%","reply",rep+" of "+n+" have replied","25–30%")+f("",pct(sig,n)+"%","convert",sig+" of "+n+" became sponsors","10%")+f("goal",sig,"sponsors","signed so far","9–13 across four events")+'</div>'+
+ '<div class="pace"><span><b>'+wk+'</b> / 10 new contacts this week</span>'+(noch?'<span class="tip">'+noch+' compan'+(noch>1?"ies have":"y has")+' no channel yet. Set it in the table below.</span>':'')+'</div>'+
+ '<div class="chans">'+CHANNELS.map(c=>{const rs=rows.filter(r=>r.channel===c[0]);const cs=rs.length,ss=rs.filter(r=>SIGNED.includes(r.stage)).length;const g=c[4][0]===c[4][1]?String(c[4][0]):c[4][0]+"–"+c[4][1];
+  return '<div class="chan"><h3>'+esc(c[1])+'</h3><div class="ex">'+esc(c[2])+'</div><div class="row2"><span><b>'+cs+'</b> / '+c[3]+' contacts</span></div><div class="bar"><i style="width:'+Math.min(100,pct(cs,c[3]))+'%"></i></div><div class="tip">'+pct(cs,n)+'% of all outreach</div>'+
+  '<div class="row2"><span><b>'+ss+'</b> / '+g+' '+esc(c[5])+'</span></div><div class="bar s"><i style="width:'+Math.min(100,pct(ss,c[4][1]))+'%"></i></div><div class="via"><b>Channel:</b> '+esc(c[6])+'</div></div>'}).join("")+'</div></section>'}
+function refreshKpis(){const k=document.getElementById("kpis");if(k)k.outerHTML=kpiHTML()}
+function viewTracker(){
+ const rows=Object.values(S.rows).sort((a,b)=>(a.created||0)-(b.created||0));
+ const opts=v=>STAGES.map(s=>'<option value="'+s[0]+'"'+(v===s[0]?" selected":"")+'>'+esc(s[1])+'</option>').join("");
+ return '<section class="band c-yellow"><div class="eyebrow">Track every touch</div><h1>Outreach tracker</h1><div class="lead">One line per company. It updates on its own when you mark a step done, and tells you what to send next.</div><div class="big" aria-hidden="true">✓</div></section>'+
+ kpiHTML()+'<div class="sec" style="margin-bottom:-12px"><span class="num">≡</span><h2>Every company</h2></div>'+
+ (S.mode==="local"?'<p class="tip">You opened this file straight from your computer, so the tracker is saved in this browser only. Once it’s deployed on Vercel, everyone shares one tracker.</p>':'')+
+ '<div class="tablewrap"><table class="tr"><thead><tr><th>Company</th><th>Contact</th><th>Channel</th><th>Where they are</th><th>Last contact</th><th>Next</th><th>Notes</th><th></th></tr></thead><tbody>'+
+ (rows.length?rows.map(r=>{const d=daysSince(r.last);const w=d==null?"":d>90?'<span class="warm cold">'+d+'d · reach out</span>':d>60?'<span class="warm mid">'+d+'d</span>':'<span class="warm ok">'+d+'d</span>';const nx=SIT[NEXT_FOR[r.stage]||"first"];
+  return '<tr data-row="'+esc(r.id)+'"><td><input type="text" data-k="company" value="'+esc(r.company)+'" placeholder="Company" aria-label="Company"></td><td><input type="text" data-k="contact" value="'+esc(r.contact)+'" placeholder="Name / email" aria-label="Contact"></td><td><select data-k="channel" aria-label="Channel">'+chOpts(r.channel)+'</select></td><td><select data-k="stage" aria-label="Where they are">'+opts(r.stage)+'</select>'+progHTML(r)+'</td><td><input type="date" data-k="last" value="'+esc(r.last)+'" aria-label="Last contact"><div style="padding-left:7px">'+w+'</div></td><td><button class="nextbtn '+nx.c+'" data-open="'+esc(NEXT_FOR[r.stage]||"first")+'" data-co="'+esc(r.company)+'" data-ct="'+esc(r.contact)+'">'+esc(nx.label)+' →</button></td><td><input type="text" data-k="notes" value="'+esc(r.notes)+'" placeholder="Notes" aria-label="Notes"></td><td><button class="x" data-del="'+esc(r.id)+'" aria-label="Remove row">✕</button></td></tr>'}).join(""):'<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:28px">No companies yet. Add your first one below.</td></tr>')+
+ '</tbody></table></div><div><button class="btn" data-add>+ Add a company</button></div>';
+}
+
+/* ---------- Router ---------- */
+const route=()=>(location.hash||"#home").slice(1)||"home";
+function render(){const r=route();tabs(r);const m=document.getElementById("main");
+ m.innerHTML=r==="timeline"?viewTimeline():r==="tracker"?viewTracker():r.startsWith("s-")?viewSit(r.slice(2)):viewHome();updateLeft()}
+window.addEventListener("hashchange",()=>{render();window.scrollTo(0,0)});
+
+/* ---------- Copy ---------- */
+function copy(t){const ok=()=>toast("Copied!");const fb=()=>{const a=document.getElementById("clip");a.value=t;a.select();try{document.execCommand("copy");ok()}catch(e){toast("Select the text and copy it by hand")}};try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}}
+
+/* ---------- Events ---------- */
+document.addEventListener("click",e=>{
+ const t=e.target.closest("[data-signout],[data-markdone],[data-addco],[data-tab],[data-reset],[data-go],[data-pick],[data-copy],[data-copyrecap],[data-add],[data-del],[data-open]");if(!t)return;
+ if(t.hasAttribute("data-signout")){try{localStorage.removeItem("gge.pw")}catch(x){}PW="";S.rows={};showLogin();return}
+ if(t.hasAttribute("data-markdone")){const k=route().slice(2);const co=(S.vals.Company||"").trim();
+  if(!co){const el=document.querySelector('[data-v="Company"]');if(el){el.focus();el.scrollIntoView({block:"center"})}toast("Type the company first");return}
+  let r=linkedRow();if(!r){addRow({company:co,contact:S.vals.Name||"",stage:STAGE_OF[k],channel:S.vals._ch||""},true);r=linkedRow()}
+  r.steps=Object.assign({},r.steps||{});
+  if(r.steps[k]){delete r.steps[k];toast("Unmarked")}else{r.steps[k]=today();r.stage=STAGE_OF[k]||r.stage;r.last=today();r.lastAction=SIT[k].title;if(!r.contact&&S.vals.Name)r.contact=S.vals.Name;toast("✓ Logged in the tracker: "+r.company)}
+  saveRow(r);refreshLink();return}
+ if(t.hasAttribute("data-addco")){const k=route().slice(2);addRow({company:(S.vals.Company||"").trim(),contact:S.vals.Name||"",stage:STAGE_OF[k]||"first"},true);refreshLink();toast("Added to the tracker");return}
+ if(t.dataset.tab!==undefined){const k=route().slice(2),n=+t.dataset.tab;S.tab[k]=n;document.querySelectorAll(".ttab").forEach((x,i)=>{x.classList.toggle("on",i===n);x.setAttribute("aria-selected",i===n)});document.querySelectorAll(".tpls .tpl").forEach((c,i)=>c.hidden=i!==n);return}
+ if(t.hasAttribute("data-reset")){S.vals={};S.recap=null;S.big=false;S.alt=false;S.pick={};S.tab={};
+  try{Object.keys(localStorage).filter(x=>x.startsWith("gge.todo.")||x==="gge.vals"||x==="gge.recap").forEach(x=>localStorage.removeItem(x))}catch(err){}
+  render();toast("Cleared. Ready for the next partner");return}
+ if(t.dataset.go){location.hash=t.dataset.go;return}
+ if(t.dataset.pick){S.pick[route().slice(2)]=t.dataset.pick;render();return}
+ if(t.dataset.copy){const {s,b}=text(t.dataset.copy);copy(plain(t.dataset.part==="s"?s:b).trim());
+  const card=t.closest(".tpl");const empt=[...card.querySelectorAll(".hl:not(.opt)")].filter(h=>!h.textContent.trim()&&(t.dataset.part==="s"?!!h.closest(".subj"):!h.closest(".subj")));
+  if(empt.length){setTimeout(()=>toast("Copied, but "+empt.length+" blank"+(empt.length>1?"s are":" is")+" still empty"),40);empt.forEach(h=>{h.classList.remove("flash");void h.offsetWidth;h.classList.add("flash")})}
+  return}
+ if(t.hasAttribute("data-copyrecap")){const r=recapRows();copy((S.vals.Company?S.vals.Company+" at "+(S.vals.event||"[event]")+": recap\n\n":"")+"WE PROMISED → WE DELIVERED (PROOF)\n"+r.rows.filter(x=>x[0].trim()).map(x=>"• "+x[0].trim()+" → "+(x[1].trim()||"—")+(x[2].trim()?" ("+x[2].trim()+")":"")).join("\n")+"\n\n"+Object.entries(r.m).map(([k,v])=>k+": "+(v||"–")).join(" · "));return}
+ if(t.hasAttribute("data-add")){addRow();return}
+ if(t.dataset.del){delRow(t.dataset.del);return}
+ if(t.dataset.open){if(t.dataset.co)S.vals.Company=t.dataset.co;if(t.dataset.ct)S.vals.Name=t.dataset.ct.split(/[\s@,]/)[0];saveVals();location.hash="s-"+t.dataset.open;return}
+});
+document.addEventListener("input",e=>{
+ const t=e.target;
+ if(t.classList&&t.classList.contains("hl")){const f=t.dataset.f;S.vals[f]=t.textContent;saveVals();
+  document.querySelectorAll('.hl[data-f="'+CSS.escape(f)+'"]').forEach(el=>{if(el!==t)el.textContent=t.textContent;el.classList.toggle("filled",!!t.textContent)});
+  document.querySelectorAll('[data-v="'+CSS.escape(f)+'"]').forEach(el=>el.value=t.textContent);updateLeft();return}
+ if(t.dataset.v){const f=t.dataset.v;S.vals[f]=t.value;saveVals();if(f==="Company"){refreshLink();const r=linkedRow();if(r&&r.contact){const nm=firstName(r.contact);S.vals.Name=nm;saveVals();document.querySelectorAll('[data-v="Name"]').forEach(el=>el.value=nm);document.querySelectorAll('.hl[data-f="Name"]').forEach(el=>{el.textContent=nm;el.classList.add("filled")});updateLeft()}}document.querySelectorAll('.hl[data-f="'+CSS.escape(f)+'"]').forEach(el=>{el.textContent=t.value;el.classList.toggle("filled",!!t.value)});updateLeft();return}
+ {const tr=t.closest&&t.closest("tr[data-row]");if(tr&&t.dataset.k&&t.tagName==="INPUT"&&t.type==="text"){const r=S.rows[tr.dataset.row];if(r){r[t.dataset.k]=t.value;clearTimeout(r._t);r._t=setTimeout(()=>{saveRow(r);refreshKpis()},500)}return}}
+ if(t.dataset.rc!==undefined){const r=recapRows();r.rows[+t.dataset.rc][+t.dataset.j]=t.value;S.recap=r;ls.set("gge.recap",r);return}
+ if(t.dataset.rm!==undefined){const r=recapRows();r.m[t.dataset.rm]=t.value;S.recap=r;ls.set("gge.recap",r);return}
+});
+document.addEventListener("keydown",e=>{if(e.target.classList&&e.target.classList.contains("hl")&&e.key==="Enter"){e.preventDefault();e.target.blur()}});
+document.addEventListener("change",e=>{
+ const t=e.target;
+ if(t.hasAttribute("data-big")){S.big=t.checked;render();return}
+ if(t.hasAttribute("data-alt")){S.alt=t.checked;render();return}
+ if(t.dataset.v==="Company"){refreshLink();return}
+ if(t.hasAttribute("data-ch")){const r=linkedRow();if(r){r.channel=t.value;saveRow(r);toast("Channel saved for "+r.company)}else{S.vals._ch=t.value;saveVals()}return}
+ const tr=t.closest("tr[data-row]");if(tr&&t.dataset.k){const r=S.rows[tr.dataset.row];if(!r)return;r[t.dataset.k]=t.value;if(t.dataset.k==="stage"&&!r.last)r.last=today();saveRow(r);if(t.dataset.k==="stage"||t.dataset.k==="last"||t.dataset.k==="channel")render();else refreshKpis()}
+});
+
+/* ---------- Tracker storage: talks to /api/rows on Vercel ----------
+   The page never touches the database directly. It sends the team password
+   to the API with every request, and the API (api/rows.js) checks it before
+   reading or writing Upstash Redis. */
+const API="/api/rows";
+let PW=ls.get("gge.pw","");
+async function api(method,body,query){
+ const res=await fetch(API+(query||""),{method,headers:{"content-type":"application/json","x-team-password":PW},body:body?JSON.stringify(body):undefined});
+ if(res.status===401){showLogin("That password didn’t work. Ask your team lead for the current one.");throw new Error("unauthorized")}
+ if(!res.ok){let msg="";try{msg=(await res.json()).error||""}catch(x){}
+  if(res.status===404)msg="The site can’t find /api/rows. Check the api folder (with rows.js inside) is in your GitHub repo, then Redeploy.";
+  throw new Error(msg||("Server error "+res.status))}
+ return res.json();
+}
+const clean=r=>{const o=Object.assign({},r);delete o._t;return o};
+const busy={},again={};
+async function saveRow(r){
+ r.updated=Date.now();
+ if(S.mode==="local"){ls.set("gge.rows",JSON.parse(JSON.stringify(S.rows,(k,v)=>k==="_t"?undefined:v)));refreshKpis&&refreshKpis();return}
+ if(busy[r.id]){again[r.id]=true;return}busy[r.id]=true;
+ try{do{again[r.id]=false;await api("PUT",{row:clean(S.rows[r.id]||r)})}while(again[r.id])}
+ catch(e){if(e.message!=="unauthorized")toast("Couldn’t save. Check your connection and try again")}
+ finally{busy[r.id]=false}
+}
+function addRow(pre,quiet){const id=Math.random().toString(36).slice(2,10);const r=Object.assign({id,company:"",contact:"",stage:"first",last:today(),notes:"",steps:{},lastAction:"",channel:"",created:Date.now()},pre||{});S.rows[id]=r;saveRow(r);if(quiet)return;render();setTimeout(()=>{const el=document.querySelector('tr[data-row="'+id+'"] input');if(el)el.focus()},30)}
+const deleted={};
+async function delRow(id){delete S.rows[id];deleted[id]=Date.now();render();
+ if(S.mode==="local"){ls.set("gge.rows",S.rows);return}
+ try{await api("DELETE",null,"?id="+encodeURIComponent(id))}catch(e){if(e.message!=="unauthorized")toast("Couldn’t remove. Try again")}}
+/* Merge what the server has with what's on screen: keep whichever copy of a
+   row was edited most recently, so a refresh never wipes what you're typing. */
+function merge(serverRows){
+ const out={};const now=Date.now();
+ serverRows.forEach(v=>{if(!v||!v.id||deleted[v.id])return;const loc=S.rows[v.id];
+  const base=Object.assign({company:"",contact:"",stage:"first",last:"",notes:"",steps:{},lastAction:"",channel:""},v);
+  out[v.id]=(loc&&((loc.updated||0)>(v.updated||0)||busy[v.id]||loc._t))?loc:base});
+ Object.values(S.rows).forEach(loc=>{if(!out[loc.id]&&!deleted[loc.id]&&(busy[loc.id]||loc._t||now-(loc.updated||0)<15000))out[loc.id]=loc});
+ return out;
+}
+function isTyping(){const a=document.activeElement;return !!(a&&a.closest&&a.closest("main")&&(/INPUT|SELECT|TEXTAREA/.test(a.tagName)||(a.classList&&a.classList.contains("hl"))))}
+async function pull(){
+ try{const data=await api("GET");const before=JSON.stringify(S.rows,(k,v)=>k==="_t"?undefined:v);S.rows=merge(data.rows||[]);
+  if(JSON.stringify(S.rows,(k,v)=>k==="_t"?undefined:v)!==before){const rt=route();if(rt==="tracker"||rt.startsWith("s-")){if(isTyping()){S.pend=true}else render()}}
+  S.offline=false;
+ }catch(e){if(e.message!=="unauthorized"&&!S.offline){S.offline=true;toast("Can’t reach the tracker right now. Retrying…")}}
+}
+/* ---------- Password screen ---------- */
+function showLogin(err){
+ let o=document.getElementById("login");
+ if(!o){o=document.createElement("div");o.id="login";document.body.appendChild(o)}
+ o.innerHTML='<form class="band c-teal" id="loginform" style="max-width:460px;width:100%"><div class="eyebrow">Girls for Gender Equity · team only</div><h1 style="font-size:40px">GGE Outreach Guide</h1><div class="lead">Enter the team password to open the guide and the shared tracker.</div><div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap"><input type="password" id="pw" placeholder="Team password" autocomplete="current-password" style="flex:1;min-width:180px;border:1px solid var(--line);border-radius:10px;padding:10px 12px" required><button class="btn" type="submit">Open</button></div>'+(err?'<p style="color:#9A2F21;font-weight:600;margin:12px 0 0">'+esc(err)+'</p>':'')+'</form>';
+ o.style.cssText="position:fixed;inset:0;background:var(--bg);display:grid;place-items:center;padding:20px;z-index:100";
+ setTimeout(()=>{const i=document.getElementById("pw");if(i)i.focus()},30);
+}
+document.addEventListener("submit",async e=>{if(e.target.id!=="loginform")return;e.preventDefault();
+ PW=document.getElementById("pw").value;
+ try{const data=await api("GET");ls.set("gge.pw",PW);S.rows=merge(data.rows||[]);const o=document.getElementById("login");if(o)o.remove();render();startPolling();toast("Welcome in")}
+ catch(err){if(err.message!=="unauthorized")showLogin(/^(Failed to fetch|Load failed|NetworkError)/.test(err.message)?"Couldn’t reach the server. Check your internet connection.":err.message)}
+});
+let polling=null;
+function startPolling(){if(polling)return;polling=setInterval(()=>{if(document.visibilityState==="visible")pull()},10000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")pull()})}
+async function boot(){
+ render();
+ if(location.protocol==="file:"){S.mode="local";S.rows=ls.get("gge.rows",{});render();return} // opened straight from disk: no server, save in this browser
+ S.mode="shared";
+ if(!PW){showLogin();return}
+ try{const data=await api("GET");S.rows=merge(data.rows||[]);render();startPolling()}
+ catch(e){if(e.message!=="unauthorized"){S.mode="shared";toast("Can’t reach the tracker right now. Retrying…");startPolling()}}
+}
+document.addEventListener("focusout",()=>setTimeout(()=>{const a=document.activeElement;if(S.pend&&!(a&&a.closest&&a.closest("main")&&(/INPUT|SELECT|TEXTAREA/.test(a.tagName)||a.classList.contains("hl")))){S.pend=false;render()}},60));
+boot();
+</script>
+</body>
+</html>
